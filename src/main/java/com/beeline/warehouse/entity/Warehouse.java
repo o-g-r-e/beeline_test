@@ -16,8 +16,8 @@ public class Warehouse {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "warehouses")
-    private Set<Item> items = new HashSet<>();
+    @OneToMany(mappedBy = "warehouse")
+    private Set<WarehouseItem> warehouseItems;
 
     public Integer getId() {
         return id;
@@ -35,12 +35,12 @@ public class Warehouse {
         this.name = name;
     }
 
-    public Set<Item> getItems() {
-        return items;
+    public Set<WarehouseItem> getWarehouseItems() {
+        return warehouseItems;
     }
 
-    public void setItems(Set<Item> items) {
-        this.items = items;
+    public void setWarehouseItems(Set<WarehouseItem> warehouseItems) {
+        this.warehouseItems = warehouseItems;
     }
 
     @Override

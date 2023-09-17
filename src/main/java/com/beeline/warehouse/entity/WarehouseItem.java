@@ -1,39 +1,31 @@
 package com.beeline.warehouse.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "warehouse_item")
 public class WarehouseItem {
 
-    @Id
-    @Column(name = "warehouse_id")
-    private Integer warehouseId;
+    @EmbeddedId
+    private WarehouseItemId warehouseItemId;
 
-    @Id
-    @Column(name = "item_id")
-    private Integer itemId;
+    @ManyToOne
+    @MapsId("warehouseId")
+    private Warehouse warehouse;
+
+    @ManyToOne
+    @MapsId("itemId")
+    private Item item;
 
     @Column(name = "amount")
     private Integer amount;
 
-    public Integer getWarehouseId() {
-        return warehouseId;
+    public Item getItem() {
+        return item;
     }
 
-    public void setWarehouseId(Integer warehouseId) {
-        this.warehouseId = warehouseId;
-    }
-
-    public Integer getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(Integer itemId) {
-        this.itemId = itemId;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     public Integer getAmount() {
@@ -42,5 +34,13 @@ public class WarehouseItem {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    public Warehouse getWarehouse() {
+        return warehouse;
+    }
+
+    public void setWarehouse(Warehouse warehouse) {
+        this.warehouse = warehouse;
     }
 }

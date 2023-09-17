@@ -22,13 +22,8 @@ public class Item {
     @Column(name = "price")
     private Double price;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "warehouse_item",
-            joinColumns = { @JoinColumn(name = "item_id") },
-            inverseJoinColumns = { @JoinColumn(name = "warehouse_id") }
-    )
-    Set<Warehouse> warehouses = new HashSet<>();
+    @OneToMany(mappedBy = "item")
+    private Set<WarehouseItem> warehouseItems;
 
     public Integer getId() {
         return id;
@@ -62,12 +57,12 @@ public class Item {
         this.price = price;
     }
 
-    public Set<Warehouse> getWarehouses() {
-        return warehouses;
+    public Set<WarehouseItem> getWarehouseItems() {
+        return warehouseItems;
     }
 
-    public void setWarehouses(Set<Warehouse> warehouses) {
-        this.warehouses = warehouses;
+    public void setWarehouseItems(Set<WarehouseItem> warehouseItems) {
+        this.warehouseItems = warehouseItems;
     }
 
     @Override
